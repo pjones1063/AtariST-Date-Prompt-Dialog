@@ -125,15 +125,15 @@ int pickDate(int yy, int mm, int dd,int ch)
 /*main program */
 int main(void)
 {	
-	short handle, junk;		
-    int ch, rez, i;
-	int yy,mm,dd;
-    struct dateinfo dinf;
+       short handle, junk;		
+       int ch, rez, i;
+       int yy,mm,dd;
+       struct dateinfo dinf;
  
-    getdate(&dinf);         /* get system date */
-	cyy = dinf.ti_year;
-	cmm = dinf.ti_month;
-	cdd = dinf.ti_day;
+        getdate(&dinf);         /* get system date */
+        cyy = dinf.ti_year;
+        cmm = dinf.ti_month;
+        cdd = dinf.ti_day;
 	
 	appl_init();    		/* start AES */
 	handle=graf_handle(&junk, &junk, &junk, &junk);	/* find AES handle */
@@ -163,11 +163,11 @@ int main(void)
 	  paintDate(yy,mm,dd);
 	  objc_draw (dialog, 0, 10, x, y, w, h) ;
 	  
-         do {							/* loop intil exit click */
-          ch = form_do (dialog, CLNDR);       
-          if(ch == LF) mm--;           /* move to nxt/prv month */     
-          if(ch == RT) mm++;	         
-          if(ch != OK)                 
+          do {							/* loop intil exit click */
+            ch = form_do (dialog, CLNDR);       
+            if(ch == LF) mm--;           /* move to nxt/prv month */     
+            if(ch == RT) mm++;	         
+            if(ch != OK)                 
           {
             if(mm > 12 )  {  mm =  1; yy++; }    
             if(mm < 1)    {  mm = 12; yy--; }    
@@ -178,8 +178,8 @@ int main(void)
 	  
 	     form_dial (FMD_SHRINK , 0, 0, 10, 10, x, y, w, h) ;
              form_dial (FMD_FINISH , 0, 0, 10, 10, x, y, w, h) ;
-       }	
-        v_clsvwk(handle);				/* close workstation */
-	appl_exit();					/* shutdown AES */
-	return 0;
+              }	
+           v_clsvwk(handle);				/* close workstation */
+       	   appl_exit();					/* shutdown AES */
+	   return 0;
 }
