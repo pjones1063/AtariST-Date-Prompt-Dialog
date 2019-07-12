@@ -1,0 +1,10 @@
+CALNDR.PRG
+.C	[-b4 -r6 -d0 -m0 -rs -fd]
+.S	[-m0]
+.L	[VERBOSE]
+=
+C.O
+C:\LC\LIB\LCMNB.LIB
+CALNDR.C
+LCG.LIB
+LC.LIB
