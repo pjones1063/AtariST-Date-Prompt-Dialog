@@ -89,7 +89,7 @@ int paintDate(int yy, int mm, int dd)
      if(d > lg && d <= dinm + lg) 
       sprintf(sd[d-1],"%ld", (d - lg) );
      else 
-	  stpcpy(sd[d-1], "    "); 
+      stpcpy(sd[d-1], "    "); 
   
     if(yy == cyy && mm == cmm && (d - lg) == cdd)
       setText(days[d-1], &sd[d-1],254);
@@ -121,8 +121,6 @@ int pickDate(int yy, int mm, int dd,int ch)
 
   return 1;
 }
-
-
 		
 /*main program */
 int main(void)
@@ -140,50 +138,48 @@ int main(void)
 	appl_init();    		/* start AES */
 	handle=graf_handle(&junk, &junk, &junk, &junk);	/* find AES handle */
 	for (i=0; i<10; work_in[i++] = 1);
-    work_in[10] = 2;
+        work_in[10] = 2;
 	v_opnvwk(work_in, &handle, work_out);			/* open workstation */
-    rez = Getrez();	
+        rez = Getrez();	
 	if(rez == 0)
 	{	
 	  form_alert (1,"[1][Med/High Rez only][I am done]");
 	}	
 	else if (!rsrc_load ("CALNDR.RSC")) 
 	{ 
-      form_alert (1,"[1][CALNDR.RSC is missing][All done]");
+          form_alert (1,"[1][CALNDR.RSC is missing][All done]");
 	}
 	else
 	{
-      yy = cyy;
-      mm = cmm;
-      dd = cdd;
-      rsrc_gaddr(R_TREE, CLNDR, &dialog) ; 
-      form_center (dialog, &x, &y,  &w , &h);
+          yy = cyy;
+          mm = cmm;
+          dd = cdd;
+          rsrc_gaddr(R_TREE, CLNDR, &dialog) ; 
+          form_center (dialog, &x, &y,  &w , &h);
 	  	
 	  graf_mouse (FINGER,&junk);    /* finish up the display */
-      form_dial (FMD_START , 0, 0, 10, 10, x, y, w, h) ;
+          form_dial (FMD_START , 0, 0, 10, 10, x, y, w, h) ;
 	  form_dial (FMD_GROW , 0, 0, 10, 10, x, y, w, h) ;
 	  paintDate(yy,mm,dd);
 	  objc_draw (dialog, 0, 10, x, y, w, h) ;
 	  
-      do {							/* loop intil exit click */
-       ch = form_do (dialog, CLNDR);       
-       if(ch == LF) mm--;           /* move to nxt/prv month */     
-       if(ch == RT) mm++;	         
-       if(ch != OK)                 
-       {
-         if(mm > 12 )  {  mm =  1; yy++; }    
-         if(mm < 1)    {  mm = 12; yy--; }    
-	     paintDate(yy,mm,dd);
-	     objc_draw (dialog, 0, 10, x, y, w, h) ;	  
-       }
-	  } while (ch != OK && pickDate(yy, mm, dd, ch));
+         do {							/* loop intil exit click */
+          ch = form_do (dialog, CLNDR);       
+          if(ch == LF) mm--;           /* move to nxt/prv month */     
+          if(ch == RT) mm++;	         
+          if(ch != OK)                 
+          {
+            if(mm > 12 )  {  mm =  1; yy++; }    
+            if(mm < 1)    {  mm = 12; yy--; }    
+	        paintDate(yy,mm,dd);
+	        objc_draw (dialog, 0, 10, x, y, w, h) ;	  
+          }
+   	     } while (ch != OK && pickDate(yy, mm, dd, ch));
 	  
-	  form_dial (FMD_SHRINK , 0, 0, 10, 10, x, y, w, h) ;
-      form_dial (FMD_FINISH , 0, 0, 10, 10, x, y, w, h) ;
-    }
-	
-    v_clsvwk(handle);				/* close workstation */
+	     form_dial (FMD_SHRINK , 0, 0, 10, 10, x, y, w, h) ;
+             form_dial (FMD_FINISH , 0, 0, 10, 10, x, y, w, h) ;
+       }	
+        v_clsvwk(handle);				/* close workstation */
 	appl_exit();					/* shutdown AES */
 	return 0;
-	
 }
