@@ -1,10 +1,7 @@
-#include "CALNDR.H"
 #include <osbind.h>
 #include <gemdefs.h>
 #include <obdefs.h>
-#include <strings.h>
-#include <stdio.h>
-
+#include "CALNDR.H"
 /*******************************************************/
 /*   CALNDR.C   MAGAMAX Laser C                        */
 /*                                                     */
@@ -36,10 +33,8 @@ char * sd[] = {
  "  ", "  ","  "
 };
 
-char tl[25];
-char dt[25];
-int  cyy,cmm,cdd;
-
+char tl[25], dt[25];
+int  cyy, cmm, cdd;
 char * mTxt[] =
 {
  "January", "February", "March", "April", "May", "June", 
@@ -132,13 +127,19 @@ int main()
 {	
     short handle, junk;		
     int ch, rez, i;
-    int yy, mm, dd;
- 
-    cyy = 2019;   /* current date not working in LC */
-    cmm = 07;     
-    cdd = 16;
-    	
-	appl_init();                          	        /* start AES */
+    int date, yy, mm, dd;
+
+    date = Tgetdate ();     /* get the system date */
+    cdd = date & 0x001f;    /* split it by mm dd yyyy */
+    cmm = (date >> 5) & 0x000f;
+    cyy = ((date >> 9) & 0x007f) + 80;
+    cyy = cyy % 100;
+    if(cyy < 60)           /* still doing Y2K 20 years later */
+       cyy += 2000;
+    else 
+       cyy += 1900;
+
+    appl_init();                          	        /* start AES */
 	handle=graf_handle(&junk, &junk, &junk, &junk);	/* find AES handle */
 	for (i=0; i<10; work_in[i++] = 1);
         work_in[10] = 2;
