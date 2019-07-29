@@ -174,13 +174,13 @@ int main()
             if(mm > 12 )  {  mm =  1; yy++; }    
             if(mm < 1)    {  mm = 12; yy--; }    
 	        paintDate(yy, mm, dd);
-            objc_draw (dialog, 0, 10, x, y, w, h);
+                objc_draw (dialog, 0, 10, x, y, w, h);
           }
    	     } while (ch != OK && pickDate(yy,mm,dd,ch));
 	     form_dial (FMD_SHRINK , 0, 0, 10, 10, x, y, w, h) ;
-         form_dial (FMD_FINISH , 0, 0, 10, 10, x, y, w, h) ;
+             form_dial (FMD_FINISH , 0, 0, 10, 10, x, y, w, h) ;
         }	
        v_clsvwk(handle);		/* close workstation */
-   	   appl_exit();				/* shutdown AES */
-	   return 0;
+       appl_exit();				/* shutdown AES */
+       return 0;
 }
