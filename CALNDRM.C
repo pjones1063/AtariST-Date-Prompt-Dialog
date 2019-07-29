@@ -3,7 +3,7 @@
 #include <obdefs.h>
 #include "CALNDR.H"
 /*******************************************************/
-/*   CALNDR.C   MAGAMAX Laser C                        */
+/*   CALNDR.C   MEGAMAX Laser C                        */
 /*                                                     */
 /*   Simple program to demo Atari 16 bit RSC files     */
 /*                                                     */
